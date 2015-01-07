@@ -13,7 +13,13 @@ aproksymator_na_bazie.o: makespl.h points.h gaus/piv_ge_solver.h
 interpolator.o: makespl.h points.h gaus/piv_ge_solver.h
 	$(CC) -I gaus -c interpolator.c
 
+hermite: main.o splines.o points.o hermite.o gaus/libge.a
+	$(CC) -o herm  main.o splines.o points.o hermite.o -L gaus -l ge 
+
+hermite.o: makespl.h points.h gaus/piv_ge_solver.h hermite.c
+	$(CC) -I gaus -c hermite.c
+
 .PHONY: clean
 
 clean:
-	-rm *.o aprox intrp prosta
+	-rm *.o aprox intrp prosta herm
